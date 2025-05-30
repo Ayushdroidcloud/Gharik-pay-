@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: gharik-wallet-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gharik-db
+          property: connectionString
+
+databases:
+  - name: gharik-db
